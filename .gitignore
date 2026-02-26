@@ -1,0 +1,6 @@
+# Large binary files
+*.tar.xz
+*.sf2
+
+# Soundfonts directory (contains large files)
+soundfonts/
