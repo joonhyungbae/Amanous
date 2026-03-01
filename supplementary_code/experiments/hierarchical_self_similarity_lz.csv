@@ -1,0 +1,11 @@
+metric,value
+seed,42
+n_events_depth,6591
+n_events_flat,3555
+n_chars_depth,6590
+n_chars_flat,3554
+LZ_depth_weighted,3266
+LZ_symbol_only,2001
+LZ_norm_depth,0.4955993930197269
+LZ_norm_flat,0.5630275745638716
+sequence,ABAABABA

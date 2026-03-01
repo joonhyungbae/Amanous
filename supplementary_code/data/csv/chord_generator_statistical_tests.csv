@@ -1,0 +1,5 @@
+Test,Statistic,p-value,Interpretation
+Kruskal-Wallis (TS),61.59746031746033,4.2099936660268604e-14,Significant difference across conditions
+Mann-Whitney (TS): Control vs Pitch-Constraint,0.0,3.019859359162157e-11,Significant (Bonferroni-corrected)
+Mann-Whitney (TS): Control vs Multi-Constraint,0.0,3.019859359162157e-11,Significant (Bonferroni-corrected)
+Mann-Whitney (TS): Pitch-Constraint vs Multi-Constraint,468.0,0.795845542466455,Not significant (Bonferroni-corrected)

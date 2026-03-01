@@ -1,0 +1,5 @@
+split_type,metric,w_pitch_h1,w_vel_h1,w_temp_h1,w_pitch_h2,w_vel_h2,w_temp_h2,max_dev_pp,mean_abs_dev_pp,pearson_r,spearman_rho
+even_odd,wvss,0.0232,99.9631,0.0137,0.0160,99.9731,0.0109,0.0068,0.0046,1.0000,1.0000
+even_odd,nwvss,0.1836,98.3188,1.4975,0.1274,98.6772,1.1955,0.0550,0.0367,1.0000,1.0000
+random_50_50,wvss_max_dev_mean,,,,,,,0.0094,,,
+random_50_50,nwvss_max_dev_mean,,,,,,,0.5197,,,

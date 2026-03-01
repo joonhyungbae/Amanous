@@ -1,0 +1,5 @@
+condition,jitter_mean_ms,jitter_std_ms,n_trials,n_notes,noise_pct,drift_scale,p_value_ttest_A_vs_B,p_value_wilcoxon_A_vs_B,mean_diff_A_minus_B_ms,cohen_d
+A_raw,3.628978,0.101536,200,526,0.1,0.03,,,,
+B_hal,0.933549,0.026663,200,526,0.1,0.03,,,,
+C_ideal,0.0,0.0,200,526,0.1,0.03,,,,
+summary,,,200,526,0.1,0.03,0.0,0.0,2.695429,29.03766

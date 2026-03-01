@@ -1,0 +1,484 @@
+
+================================================================================
+DRAFT RULE SCHEMA FOR UNIFIED DISKLAVIER COMPOSITION SYSTEM
+================================================================================
+
+SYSTEM ARCHITECTURE
+-------------------
+Three-layer hierarchical system:
+  Layer 1: Global Structure (L-System or tempo canon framework)
+  Layer 2: Local Event Generation (Stochastic or deterministic)  
+  Layer 3: Hardware Mapping (MIDI generation with constraints)
+
+
+FORMAL GRAMMAR SPECIFICATION
+-----------------------------
+
+<Composition> ::= <GlobalParameters> <StructureLayer> <EventLayer> <HardwareLayer>
+
+<GlobalParameters> ::= {
+    tempo_global: positive_real,
+    duration_total: positive_real,
+    key_range: [min_key, max_key] where 0 ≤ min_key < max_key ≤ 87,
+    density_target: positive_real,
+    coherence_mode: {melodic, textural, transition}
+}
+
+<StructureLayer> ::= <TempoCanon> | <LSystemStructure> | <MarkovStructure>
+
+<EventLayer> ::= <DeterministicEvents> | <StochasticEvents> | <HybridEvents>
+
+<HardwareLayer> ::= <MIDIGeneration> with <ConstraintValidation>
+
+
+LAYER 1: STRUCTURE LAYER
+-------------------------
+
+Rule Schema 1A: Tempo Canon Structure
+--------------------------------------
+INPUT:
+    - voice_ratios: list of tempo ratios [r1, r2, ..., rn]
+    - convergence_strategy: {periodic, arch_form, never}
+    - base_tempo: BPM
+
+ALGORITHM:
+    for each voice v in voices:
+        tempo_v(t) = calculate_tempo(base_tempo, voice_ratios[v], t, strategy)
+
+    if convergence_strategy == "arch_form":
+        midpoint = duration_total / 2
+        for t > midpoint:
+            tempo_v(t) = swap_tempo_function(tempo_v, t, midpoint)
+
+    convergence_points = calculate_convergence_times(voice_ratios)
+
+OUTPUT:
+    - tempo_functions: {voice_id: tempo(t) function}
+    - convergence_times: list of t values
+
+CONSTRAINTS:
+    - tempo_v(t) > 0 for all v, t
+    - max(tempo_v(t)) · note_rate ≤ 20 Hz (per key reset limit)
+
+
+Rule Schema 1B: L-System Structure
+-----------------------------------
+INPUT:
+    - axiom: initial symbol string
+    - production_rules: {symbol: replacement_string}
+    - iteration_depth: positive integer
+    - interpretation_map: {symbol: musical_parameter_set}
+
+ALGORITHM:
+    current_string = axiom
+    for i in range(iteration_depth):
+        new_string = ""
+        for symbol in current_string:
+            new_string += production_rules.get(symbol, symbol)
+        current_string = new_string
+
+        if len(current_string) > MAX_LENGTH:
+            truncate or terminate
+
+    musical_sequence = []
+    for symbol in current_string:
+        parameters = interpretation_map[symbol]
+        musical_sequence.append(create_event(parameters))
+
+OUTPUT:
+    - musical_sequence: ordered list of events with parameters
+    - generation_tree: hierarchical structure (optional)
+
+CONSTRAINTS:
+    - len(current_string) < MAX_EVENTS (computational limit)
+    - All symbols must have interpretation mappings
+
+
+Rule Schema 1C: Markov Chain Structure
+---------------------------------------
+INPUT:
+    - states: list of musical states
+    - transition_matrix: P[i][j] = probability of i→j
+    - initial_state: starting state
+    - duration: total duration or event count
+
+ALGORITHM:
+    current_state = initial_state
+    state_sequence = [current_state]
+
+    for t in time_steps:
+        next_state = sample_from_distribution(transition_matrix[current_state])
+        state_sequence.append(next_state)
+        current_state = next_state
+
+OUTPUT:
+    - state_sequence: temporal sequence of states
+    - state_durations: how long in each state
+
+CONSTRAINTS:
+    - sum(transition_matrix[i]) = 1 for all i (row-stochastic)
+    - 0 ≤ P[i][j] ≤ 1 for all i,j
+
+
+LAYER 2: EVENT LAYER
+---------------------
+
+Rule Schema 2A: Deterministic Event Generation (Canon-style)
+------------------------------------------------------------
+INPUT:
+    - tempo_function: from Structure Layer
+    - pitch_sequence: melodic material for voice
+    - voice_id: which voice/canon part
+
+ALGORITHM:
+    events = []
+    current_time = 0
+
+    for note in pitch_sequence:
+        tempo_at_time = tempo_function(current_time)
+        duration = calculate_duration(note, tempo_at_time)
+
+        event = {
+            'time': current_time,
+            'pitch': note.pitch,
+            'duration': duration,
+            'velocity': note.velocity
+        }
+        events.append(event)
+        current_time += note.ioi / tempo_at_time
+
+OUTPUT:
+    - events: time-stamped event list
+
+CONSTRAINTS:
+    - Events for same pitch must satisfy: IOI ≥ 50ms
+    - Total simultaneous notes ≤ 88
+
+
+Rule Schema 2B: Stochastic Event Generation (Xenakis-style)
+-----------------------------------------------------------
+INPUT:
+    - density_function: λ(t) - time-varying density
+    - pitch_distribution: probability distribution over pitches
+    - duration_distribution: probability distribution over durations
+    - velocity_distribution: probability distribution over velocities
+
+ALGORITHM:
+    events = []
+    current_time = 0
+
+    while current_time < duration_total:
+        lambda_current = density_function(current_time)
+
+        # Number of events in next time window
+        delta_t = TIME_WINDOW
+        n_events = sample_poisson(lambda_current * delta_t)
+
+        for _ in range(n_events):
+            event_time = current_time + sample_uniform(0, delta_t)
+
+            event = {
+                'time': event_time,
+                'pitch': sample_from(pitch_distribution),
+                'duration': sample_from(duration_distribution),
+                'velocity': sample_from(velocity_distribution)
+            }
+            events.append(event)
+
+        current_time += delta_t
+
+    events.sort(key=lambda e: e['time'])
+
+OUTPUT:
+    - events: stochastically generated event list
+
+CONSTRAINTS:
+    - Validate density: actual_density(t) ≈ target_density(t)
+    - Pitch range: 0 ≤ pitch ≤ 87
+
+
+Rule Schema 2C: Hybrid Event Generation
+---------------------------------------
+INPUT:
+    - deterministic_skeleton: structural events from Layer 1
+    - stochastic_parameters: decoration/variation parameters
+    - hybrid_ratio: α ∈ [0,1] (0=fully deterministic, 1=fully stochastic)
+
+ALGORITHM:
+    if hybrid_ratio == 0:
+        return deterministic_skeleton
+    elif hybrid_ratio == 1:
+        return stochastic_generation(parameters)
+    else:
+        skeleton_events = deterministic_skeleton
+
+        for event in skeleton_events:
+            # Add stochastic variation
+            time_jitter = sample_gaussian(0, σ_time * hybrid_ratio)
+            pitch_variation = sample_gaussian(0, σ_pitch * hybrid_ratio)
+
+            event['time'] += time_jitter
+            event['pitch'] = quantize_pitch(event['pitch'] + pitch_variation)
+
+        # Add stochastic filling events
+        n_fill = int(len(skeleton_events) * hybrid_ratio)
+        fill_events = generate_stochastic_events(n_fill, parameters)
+
+        all_events = skeleton_events + fill_events
+        all_events.sort(key=lambda e: e['time'])
+
+OUTPUT:
+    - events: hybrid deterministic/stochastic event list
+
+
+LAYER 3: HARDWARE LAYER
+------------------------
+
+Rule Schema 3: MIDI Generation with Constraint Validation
+----------------------------------------------------------
+INPUT:
+    - events: event list from Layer 2
+    - hardware_specs: Disklavier specifications
+
+ALGORITHM:
+    midi_events = []
+    key_last_used = [0] * 88  # Track last use time for each key
+    active_notes = []  # Currently sounding notes
+
+    for event in events:
+        # CONSTRAINT: Check key reset time
+        if event['time'] - key_last_used[event['pitch']] < 0.050:
+            # Adjust timing or skip event
+            event['time'] = key_last_used[event['pitch']] + 0.050
+
+        # CONSTRAINT: Check polyphony limit
+        active_notes = [n for n in active_notes if n['end_time'] > event['time']]
+        if len(active_notes) >= 88:
+            continue  # Skip or queue event
+
+        # CONSTRAINT: Velocity latency compensation
+        latency = 0.030 - (event['velocity'] / 1024.0) * 0.020  # Linear model
+        adjusted_time = event['time'] + latency
+
+        # CONSTRAINT: Validate velocity range
+        velocity_clamped = max(1, min(1024, event['velocity']))
+
+        # Generate MIDI note on
+        midi_note_on = {
+            'type': 'note_on',
+            'time': adjusted_time,
+            'pitch': event['pitch'],
+            'velocity': velocity_clamped
+        }
+
+        # Generate MIDI note off
+        midi_note_off = {
+            'type': 'note_off',
+            'time': adjusted_time + event['duration'],
+            'pitch': event['pitch'],
+            'velocity': 0
+        }
+
+        midi_events.extend([midi_note_on, midi_note_off])
+
+        # Update tracking
+        key_last_used[event['pitch']] = event['time']
+        active_notes.append({
+            'pitch': event['pitch'],
+            'end_time': event['time'] + event['duration']
+        })
+
+    midi_events.sort(key=lambda e: e['time'])
+
+OUTPUT:
+    - midi_events: validated MIDI event sequence
+    - constraint_violations: list of violations (for reporting)
+
+
+INTEGRATION MODES
+-----------------
+
+Mode 1: Tempo Canon Primary
+    Structure: Tempo canon (Layer 1A)
+    Events: Deterministic (Layer 2A)
+    Result: Pure Nancarrow-style tempo canon
+
+Mode 2: Stochastic Primary
+    Structure: Markov chain (Layer 1C)
+    Events: Stochastic (Layer 2B)
+    Result: Pure Xenakis-style stochastic composition
+
+Mode 3: L-System Primary
+    Structure: L-system (Layer 1B)
+    Events: Deterministic from interpretation (Layer 2A)
+    Result: Pure L-system generated composition
+
+Mode 4: Hybrid Tempo-Stochastic
+    Structure: Tempo canon (Layer 1A)
+    Events: Stochastic decoration (Layer 2C with α < 1)
+    Result: Tempo canon framework with stochastic variation
+
+Mode 5: Hybrid L-System-Stochastic
+    Structure: L-system (Layer 1B)
+    Events: Stochastic decoration (Layer 2C)
+    Result: L-system structure with probabilistic realization
+
+Mode 6: Full Integration
+    Structure: Hierarchical (Tempo canon at macro, L-system at meso, Markov at micro)
+    Events: Hybrid generation (Layer 2C)
+    Result: Multi-scale integration of all three approaches
+
+
+EXAMPLE INSTANTIATION: Simple Tempo Canon
+------------------------------------------
+
+# Configuration
+config = {
+    'mode': 'tempo_canon_primary',
+    'voice_ratios': [1.0, Fraction(3, 4), Fraction(4, 5)],
+    'convergence_strategy': 'periodic',
+    'base_tempo': 120,  # BPM
+    'duration_total': 60,  # seconds
+    'pitch_sequences': [
+        [60, 62, 64, 65, 67, 69, 71, 72],  # C major scale
+        [48, 50, 52, 53, 55, 57, 59, 60],  # Lower octave
+        [72, 74, 76, 77, 79, 81, 83, 84]   # Higher octave
+    ]
+}
+
+# Layer 1: Structure
+tempo_functions = create_tempo_canon(
+    voice_ratios=config['voice_ratios'],
+    base_tempo=config['base_tempo'],
+    convergence_strategy=config['convergence_strategy']
+)
+
+# Layer 2: Events  
+all_events = []
+for voice_id, (tempo_func, pitch_seq) in enumerate(
+    zip(tempo_functions, config['pitch_sequences'])
+):
+    voice_events = generate_deterministic_events(
+        tempo_function=tempo_func,
+        pitch_sequence=pitch_seq,
+        voice_id=voice_id
+    )
+    all_events.extend(voice_events)
+
+# Layer 3: Hardware
+midi_output = generate_midi_with_constraints(
+    events=all_events,
+    hardware_specs=DISKLAVIER_PRO_SPECS
+)
+
+# Output
+save_midi_file(midi_output, "tempo_canon_output.mid")
+
+
+EXAMPLE INSTANTIATION: Stochastic Cloud
+----------------------------------------
+
+# Configuration
+config = {
+    'mode': 'stochastic_primary',
+    'density_function': lambda t: 50 + 30 * np.sin(2*np.pi*t/20),  # Oscillating density
+    'pitch_distribution': ('gaussian', {'mu': 60, 'sigma': 12}),
+    'duration_distribution': ('exponential', {'lambda': 5}),
+    'velocity_distribution': ('uniform', {'min': 400, 'max': 800}),
+    'duration_total': 60
+}
+
+# Layer 1: Structure (implicit Markov with single state)
+state_sequence = ['cloud'] * 600  # 100ms time windows
+
+# Layer 2: Events
+events = generate_stochastic_events(
+    density_function=config['density_function'],
+    pitch_distribution=config['pitch_distribution'],
+    duration_distribution=config['duration_distribution'],
+    velocity_distribution=config['velocity_distribution'],
+    duration_total=config['duration_total']
+)
+
+# Layer 3: Hardware
+midi_output = generate_midi_with_constraints(
+    events=events,
+    hardware_specs=DISKLAVIER_PRO_SPECS
+)
+
+# Output
+save_midi_file(midi_output, "stochastic_cloud_output.mid")
+
+
+VALIDATION FUNCTIONS
+--------------------
+
+def validate_hardware_constraints(events):
+    '''Check all hardware constraints are satisfied'''
+    violations = []
+
+    # Check key reset times
+    key_times = {}
+    for e in sorted(events, key=lambda x: x['time']):
+        if e['pitch'] in key_times:
+            if e['time'] - key_times[e['pitch']] < 0.050:
+                violations.append(('key_reset', e['pitch'], e['time']))
+        key_times[e['pitch']] = e['time']
+
+    # Check polyphony
+    for t in sample_times:
+        active = [e for e in events 
+                  if e['time'] <= t < e['time'] + e['duration']]
+        if len(active) > 88:
+            violations.append(('polyphony', t, len(active)))
+
+    return violations
+
+def validate_psychoacoustic_coherence(events):
+    '''Check perceptual coherence'''
+    issues = []
+
+    # Check density
+    for window in time_windows:
+        density = count_events_in_window(events, window) / window_size
+        if density > 100:
+            issues.append(('high_density', window, density))
+
+    return issues
+
+
+API SPECIFICATION
+-----------------
+
+class DisklavierComposer:
+    def __init__(self, config):
+        self.config = config
+        self.constraints = load_hardware_constraints()
+
+    def set_structure(self, structure_type, parameters):
+        '''Configure Layer 1: Structure'''
+        pass
+
+    def set_event_generation(self, generation_type, parameters):
+        '''Configure Layer 2: Event generation'''
+        pass
+
+    def generate(self):
+        '''Generate composition through all three layers'''
+        structure = self.generate_structure()
+        events = self.generate_events(structure)
+        midi = self.apply_hardware_constraints(events)
+        return midi
+
+    def validate(self, midi):
+        '''Validate against all constraints'''
+        pass
+
+    def export(self, midi, filename):
+        '''Export to MIDI file'''
+        pass
+
+
+================================================================================
+END OF RULE SCHEMA
+================================================================================

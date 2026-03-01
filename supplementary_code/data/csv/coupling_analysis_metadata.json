@@ -1,0 +1,55 @@
+{
+  "experiment": "Dynamic Parameter Coupling Proof-of-Concept",
+  "duration": 60.0,
+  "voice1": {
+    "type": "stochastic",
+    "generation_method": "Poisson process",
+    "density_function": "lambda(t) = 5 + 0.75*t",
+    "density_range": [
+      5,
+      50
+    ],
+    "pitch_distribution": "uniform_chromatic",
+    "pitch_range": [
+      0,
+      87
+    ],
+    "n_events": 1671,
+    "actual_density_range": [
+      2.0,
+      62.0
+    ],
+    "mean_density": 27.85,
+    "density_rmse": 6.463224491949304
+  },
+  "voice2": {
+    "type": "coupled-deterministic",
+    "coupling_function": "IOI(t) = 0.5 / (1 + density_voice1(t))",
+    "measurement_window": 1.0,
+    "pitch": 60,
+    "n_events": 3453,
+    "ioi_range": [
+      0.007938953849066286,
+      0.16666666666666666
+    ],
+    "mean_ioi": 0.017417292701651557,
+    "mean_rate_hz": 57.4142042124134
+  },
+  "coupling_verification": {
+    "deterministic_error_max": 0.0,
+    "spearman_correlation": -0.9999999999999999,
+    "spearman_pvalue": 0.0,
+    "pearson_correlation": -0.7962928732143304,
+    "pearson_pvalue": 0.0,
+    "linearized_pearson": 1.0,
+    "linearized_pvalue": 0.0,
+    "success": true
+  },
+  "composition": {
+    "total_events": 5124,
+    "voice1_fraction": 0.3261124121779859,
+    "voice2_fraction": 0.6738875878220141,
+    "combined_density": 85.4,
+    "unique_pitches": 88
+  }
+}

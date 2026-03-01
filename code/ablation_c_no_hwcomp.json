@@ -1,0 +1,25 @@
+{
+  "ablation": "no_hw_compensation",
+  "full_pipeline": {
+    "onset_alignment_sd_ms": 0.0,
+    "velocity_timing_r": 0.0,
+    "velocity_timing_p": NaN,
+    "ioi_ks_l3_vs_l4": 0.06302757456387169
+  },
+  "ablated": {
+    "linear": {
+      "onset_alignment_sd_ms": 0.328504306141814,
+      "velocity_timing_r": -1.0,
+      "velocity_timing_p": 0.0
+    },
+    "powerlaw_c05": {
+      "onset_alignment_sd_ms": 0.20887407862725904,
+      "velocity_timing_r": -0.997825048458459,
+      "velocity_timing_p": 0.0
+    },
+    "ioi_ks_l3_vs_l4": 0.0
+  },
+  "comparison": {
+    "pct_change_align_sd": 100.0
+  }
+}
