@@ -26,7 +26,7 @@ All results are computational (MIDI/statistical); psychoacoustic validation is p
 |------|-------------|
 | `code/` | Main composition pipeline: `amanous_composer.py`, ablations, MIDI→audio, analysis |
 | `supplementary_code/` | Experiments, RQ validations, coherence metrics, HAL and latency robustness |
-| `compositions/` | Example MIDI outputs (e.g. `minimalist_phase.mid`, `convergence_point.mid`) |
+| `compositions/` | Example composition data (event CSVs; MIDI/WAV when generated) |
 | `audio_hq/` | High-quality WAV renders of selected compositions |
 | `web/` | React + Vite site for [amanous.xyz](https://www.amanous.xyz) — play excerpts, metadata aligned with paper |
 | `paper.tex` | LaTeX manuscript (JCMS); `reference.bib` for bibliography |
@@ -54,6 +54,26 @@ python amanous_composer.py   # or use custom_composition.py for custom configs
 
 Ablations and experiments live under `supplementary_code/` (see `experiments/`, `rq1_distribution_switching/`, etc.). Check individual scripts for usage.
 
+### SoundFonts (MIDI → WAV)
+
+SoundFont files (`.sf2`) are **not** in the repo (large binaries; see `.gitignore`). To convert MIDI to WAV you need either a system GM soundfont or a piano soundfont in `soundfonts/`.
+
+**Option A — Quick start (Linux):** Install FluidSynth and the GM soundfont; the pipeline will use it automatically.
+
+```bash
+sudo apt install -y fluidsynth fluid-soundfont-gm
+```
+
+**Option B — Better piano quality:** Use the Salamander Grand Piano (Yamaha C5, Disklavier-like). Run the setup script, then download and place the `.sf2` as instructed:
+
+```bash
+cd code
+python download_soundfont.py
+# Follow the printed links; put the .sf2 in repo root's soundfonts/ as SalamanderGrandPiano.sf2 or SalamanderC5-Lite.sf2
+```
+
+Optional: `python download_soundfont.py --download-salamander` attempts an automatic download (Google Drive may require manual confirmation). Check available soundfonts: `python midi_to_audio.py --list-sf`.
+
 ### Web (listen to excerpts)
 
 ```bash
@@ -62,13 +82,6 @@ Ablations and experiments live under `supplementary_code/` (see `experiments/`, 
 ```
 
 Place WAV files in `web/public/audio/` (e.g. `canonical_abaababa.wav`, `convergence_point.wav`) so the player can load them. Track list and descriptions are in `web/src/data/tracks.js`.
-
-### Deploy web to GitHub Pages
-
-```bash
-./deploy.sh
-# Cleans node_modules, installs, builds, and runs gh-pages deploy
-```
 
 ---
 

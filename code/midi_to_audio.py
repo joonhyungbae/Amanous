@@ -12,11 +12,14 @@ import os
 import sys
 from pathlib import Path
 
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+
 # Default soundfont paths (priority order)
 DEFAULT_SOUNDFONTS = [
-    # Salamander Grand Piano (Yamaha C5, Disklavier-like, 1.2GB HQ)
-    "/home/jhbae/Amanous/soundfonts/SalamanderGrandPiano.sf2",
-    # System default GM soundfonts
+    # Salamander Grand Piano (Yamaha C5, Disklavier-like; place after download)
+    str(_REPO_ROOT / "soundfonts" / "SalamanderGrandPiano.sf2"),
+    str(_REPO_ROOT / "soundfonts" / "SalamanderC5-Lite.sf2"),
+    # System default GM soundfonts (e.g. apt install fluid-soundfont-gm)
     "/usr/share/sounds/sf2/FluidR3_GM.sf2",
     "/usr/share/soundfonts/FluidR3_GM.sf2",
     "/usr/share/sounds/sf2/default-GM.sf2",
@@ -218,7 +221,6 @@ def batch_convert(input_dir: str, output_dir: str = None,
     return results
 
 # Default output: web demo path (served on deploy)
-_REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT_DIR = _REPO_ROOT / "web" / "public" / "audio"
 
 # =============================================================================
