@@ -83,15 +83,6 @@ Optional: `python download_soundfont.py --download-salamander` attempts an autom
 
 Place WAV files in `web/public/audio/` (e.g. `canonical_abaababa.wav`, `convergence_point.wav`) so the player can load them. Track list and descriptions are in `web/src/data/tracks.js`.
 
----
-
-## Citation
-
-If you use Amanous or build on its methodology, please cite the paper:
-
-- *Amanous: Distribution-Switching for Superhuman Piano Density on Disklavier*, Journal of Creative Music Systems. (See `paper.tex` and `reference.bib` for full reference.)
-
----
 
 ## License
 
