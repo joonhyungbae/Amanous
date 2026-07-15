@@ -1,0 +1,17 @@
+{
+  "window_ms": 40.0,
+  "seed": 42,
+  "n_trials": 40,
+  "n_events": 200,
+  "n_levels": 14,
+  "peak_discriminability_density": 25,
+  "peak_gap": 0.2221404638868414,
+  "peak_ci95": [
+    25.0,
+    25.0
+  ],
+  "peak_median_bootstrap": 25.0,
+  "half_max_density_high_side": 40,
+  "gap_at_lowest": 0.10439370398936343,
+  "gap_at_highest": 0.1252088822588844
+}

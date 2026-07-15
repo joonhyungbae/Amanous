@@ -1,0 +1,5 @@
+analysis,finding,value
+layer4_residual_jitter_min_at,c,0.5
+layer4_residual_jitter_std_at_c05_ms,ms,0.0
+cp_rational_34_stable_across_epsilon,counts,"[11, 11, 11, 11]"
+cp_irrational_epi_monotonic_with_epsilon,counts,"[5, 11, 26, 51]"

@@ -1,0 +1,5 @@
+Model,Mathematical Form,Latency at v=0,Latency at v=512,Latency at v=1023,Mean Latency,Behavior,Best for
+Linear,delay = 30 - 20×(v/1023),30.00 ms,20.00 ms,10.00 ms,20.00 ms,Constant rate,"Simplicity, baseline"
+Power-law (c=0.5),delay = 30 - 20×(v/1023)^0.5,30.00 ms,15.85 ms,10.00 ms,16.67 ms,Fast decrease at low v,Moderate non-linearity
+Power-law (c=2.0),delay = 30 - 20×(v/1023)^2,30.00 ms,25.00 ms,10.00 ms,23.33 ms,Slow decrease at low v,Conservative timing
+Logarithmic,delay = 30 - 20×log(v+1)/log(1024),30.00 ms,12.00 ms,10.00 ms,12.87 ms,Very fast decrease at low v,Perceptual phenomena

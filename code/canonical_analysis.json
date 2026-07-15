@@ -1,0 +1,313 @@
+{
+  "seed": 42,
+  "lsystem_sequence": "ABAABABA",
+  "n_events_total": 6591,
+  "duration_s": 74.02999999999943,
+  "symbols": {
+    "A": {
+      "n_sections": 5,
+      "n_events": 3507,
+      "total_duration_s": 50.0,
+      "aggregate_density_nps": 70.14,
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "n_distinct_velocities": 1
+    },
+    "B": {
+      "n_sections": 3,
+      "n_events": 3084,
+      "total_duration_s": 24.0,
+      "aggregate_density_nps": 128.5,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "n_distinct_velocities": 63
+    }
+  },
+  "density_bifurcation": {
+    "A_mean_nps": 70.13999999999999,
+    "B_mean_nps": 128.5,
+    "gap_nps": 58.360000000000014,
+    "U": 0.0,
+    "p": 0.03139516531319054
+  },
+  "registral_separation_semitones": 12.003333953322672,
+  "coherence": {
+    "MC": {
+      "n_same": 13,
+      "n_cross": 15,
+      "same_mean": 0.7437252200543644,
+      "same_sd": 0.006925167212657797,
+      "cross_mean": 0.6522997668719673,
+      "cross_sd": 0.01048727592317068,
+      "gap": 0.09142545318239703,
+      "df": 26,
+      "t": 26.749184620547776,
+      "p": 1.9077958346432088e-20,
+      "cohens_d": 10.136132014044328,
+      "d_ci95": [
+        7.379384152466274,
+        12.892879875622382
+      ]
+    },
+    "RC": {
+      "n_same": 13,
+      "n_cross": 15,
+      "same_mean": 0.8475478949937479,
+      "same_sd": 0.052673024976895286,
+      "cross_mean": 0.48378165262859196,
+      "cross_sd": 0.0035635472017489424,
+      "gap": 0.363766242365156,
+      "df": 26,
+      "t": 26.755434562351393,
+      "p": 1.896632076835413e-20,
+      "cohens_d": 10.138500319325413,
+      "d_ci95": [
+        7.381155091482748,
+        12.895845547168078
+      ]
+    }
+  },
+  "pcc_by_symbol": {
+    "A_mean": 0.23180643063124523,
+    "A_sd": 0.004236183391390603,
+    "n_A": 5,
+    "B_mean": 0.007258419805174721,
+    "B_sd": 0.004691888519279796,
+    "n_B": 3,
+    "U": 15.0,
+    "p": 0.03571428571428571,
+    "cohens_d": 51.11099864961556
+  },
+  "degradation": [
+    {
+      "parameter": "IOI",
+      "symbol": "A",
+      "after_L2": 0.0,
+      "after_L3": 0.0,
+      "after_L4": 0.0
+    },
+    {
+      "parameter": "IOI",
+      "symbol": "B",
+      "after_L2": 0.03712370462978227,
+      "after_L3": 0.03318784548048431,
+      "after_L4": 0.3221193565369049
+    },
+    {
+      "parameter": "Pitch",
+      "symbol": "A",
+      "after_L2": 0.03944843719880806,
+      "after_L3": 0.03944843719880806,
+      "after_L4": 0.03944843719880806
+    },
+    {
+      "parameter": "Pitch",
+      "symbol": "B",
+      "after_L2": 0.038555308828007874,
+      "after_L3": 0.038555308828007874,
+      "after_L4": 0.038555308828007874
+    },
+    {
+      "parameter": "Velocity",
+      "symbol": "A",
+      "after_L2": 0.0,
+      "after_L3": 0.0,
+      "after_L4": 0.0
+    },
+    {
+      "parameter": "Velocity",
+      "symbol": "B",
+      "after_L2": 0.04351458607088371,
+      "after_L3": 0.04351458607088371,
+      "after_L4": 0.04351458607088371
+    }
+  ],
+  "per_section": [
+    {
+      "index": 0,
+      "symbol": "A",
+      "generation": 4,
+      "n_events": 701,
+      "duration_s": 10.0,
+      "density_nps": 70.1,
+      "pcc": 0.23145440768421977,
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "n_velocities": 1
+    },
+    {
+      "index": 1,
+      "symbol": "B",
+      "generation": 4,
+      "n_events": 1004,
+      "duration_s": 8.0,
+      "density_nps": 125.5,
+      "pcc": 0.0034742770484261776,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "n_velocities": 63
+    },
+    {
+      "index": 2,
+      "symbol": "A",
+      "generation": 4,
+      "n_events": 701,
+      "duration_s": 10.0,
+      "density_nps": 70.1,
+      "pcc": 0.23319299728477694,
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "n_velocities": 1
+    },
+    {
+      "index": 3,
+      "symbol": "A",
+      "generation": 4,
+      "n_events": 702,
+      "duration_s": 10.0,
+      "density_nps": 70.2,
+      "pcc": 0.2276407276097585,
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "n_velocities": 1
+    },
+    {
+      "index": 4,
+      "symbol": "B",
+      "generation": 4,
+      "n_events": 1049,
+      "duration_s": 8.0,
+      "density_nps": 131.125,
+      "pcc": 0.012508171271758739,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "n_velocities": 63
+    },
+    {
+      "index": 5,
+      "symbol": "A",
+      "generation": 4,
+      "n_events": 702,
+      "duration_s": 10.0,
+      "density_nps": 70.2,
+      "pcc": 0.23824434805776062,
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "n_velocities": 1
+    },
+    {
+      "index": 6,
+      "symbol": "B",
+      "generation": 4,
+      "n_events": 1031,
+      "duration_s": 8.0,
+      "density_nps": 128.875,
+      "pcc": 0.005792811095339245,
+      "pitch_classes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "n_velocities": 63
+    },
+    {
+      "index": 7,
+      "symbol": "A",
+      "generation": 4,
+      "n_events": 701,
+      "duration_s": 10.0,
+      "density_nps": 70.1,
+      "pcc": 0.22849967251971037,
+      "pitch_classes": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        9,
+        11
+      ],
+      "n_velocities": 1
+    }
+  ]
+}

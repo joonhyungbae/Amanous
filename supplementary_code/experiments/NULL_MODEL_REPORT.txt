@@ -1,0 +1,36 @@
+
+============================================================
+Statistical Report: Amanous vs Random (Null Model)
+  Null: Pitch Uniform, Velocity Uniform, IOI Exponential
+============================================================
+
+[1] Low density (10, 15, 20 notes/s): Amanous > Random (one-sided t-test)
+    Melodic Coherence: t=-27.929, p=1.0000  (A mean=0.195, R mean=0.537)
+      -> Amanous significantly higher than Random: No (p>=0.05)
+    Tonal Stability:   t=14.634, p=0.0000  (A mean=0.095, R mean=0.028)
+      -> Amanous significantly higher than Random: Yes (p<0.05)
+
+[2] Around 30 notes/s: Amanous vs Random (two-sided t-test)
+    Melodic Coherence: t=-17.542, p=0.0000  (A mean=0.173, R mean=0.528)
+    Tonal Stability:   t=7.054, p=0.0000  (A mean=0.081, R mean=0.022)
+
+[3] Crossover: First density where Amanous mean <= Random mean
+    MC: 10.0 notes/s
+    TS: (no crossover)
+
+[4] Per-density t-test (Amanous vs Random, two-sided)
+      10.0 n/s  MC t=-12.883 p=0.0000 ***  TS t=10.964 p=0.0000 ***
+      15.0 n/s  MC t=-16.609 p=0.0000 ***  TS t=7.376 p=0.0000 ***
+      20.0 n/s  MC t=-21.030 p=0.0000 ***  TS t=7.465 p=0.0000 ***
+      25.0 n/s  MC t=-27.300 p=0.0000 ***  TS t=4.772 p=0.0003 ***
+      28.0 n/s  MC t=-17.628 p=0.0000 ***  TS t=10.106 p=0.0000 ***
+      30.0 n/s  MC t=-17.542 p=0.0000 ***  TS t=7.054 p=0.0000 ***
+      40.0 n/s  MC t=-13.400 p=0.0000 ***  TS t=7.689 p=0.0000 ***
+      50.0 n/s  MC t=-18.575 p=0.0000 ***  TS t=6.983 p=0.0000 ***
+      60.0 n/s  MC t=-21.248 p=0.0000 ***  TS t=4.736 p=0.0003 ***
+      80.0 n/s  MC t=-23.370 p=0.0000 ***  TS t=7.790 p=0.0000 ***
+     100.0 n/s  MC t=-16.580 p=0.0000 ***  TS t=9.586 p=0.0000 ***
+     120.0 n/s  MC t=-12.246 p=0.0000 ***  TS t=12.272 p=0.0000 ***
+     150.0 n/s  MC t=-14.062 p=0.0000 ***  TS t=9.515 p=0.0000 ***
+     200.0 n/s  MC t=-16.900 p=0.0000 ***  TS t=7.648 p=0.0000 ***
+============================================================

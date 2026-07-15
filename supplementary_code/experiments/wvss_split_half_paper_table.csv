@@ -1,0 +1,8 @@
+Metric,Half A,Half B,Summary
+w_pitch (%),3.87,3.87,Δ = 0.00 pp
+w_velocity (%),96.13,96.13,Δ = 0.00 pp
+w_temporal (%),0.00,0.00,Δ = 0.00 pp
+Dominant domain (Half A),velocity,—,Consistent
+Dominant domain (Half B),—,velocity,
+Pearson r (Half A vs Half B weights),—,—,1.0000
+VSS change (%) when applying Half A weights to Half B,—,—,0.00%

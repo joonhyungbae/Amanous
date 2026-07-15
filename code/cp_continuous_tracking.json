@@ -1,0 +1,18 @@
+{
+  "seed": 42,
+  "n_events": 761,
+  "epsilon_ms": 50,
+  "t_cp_s": 15.0,
+  "total_s": 30.0,
+  "rate_profile": "lambda(t) = 5 + 40*|t - 15|/15",
+  "pearson_r": 0.9281717191592612,
+  "pearson_p": 1.5301477226950924e-13,
+  "rmse_nps": 4.6971228388198405,
+  "r_pre_cp": 0.8960871267640674,
+  "p_pre_cp": 6.1920593829962605e-06,
+  "r_post_cp": 0.9608359839710521,
+  "p_post_cp": 1.277116097228039e-08,
+  "near_cp_density_nps": 10.166666666666666,
+  "end_density_nps": 40.5,
+  "reduction_factor": 3.9836065573770494
+}

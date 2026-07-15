@@ -1,0 +1,22 @@
+Parameter Domain,Nancarrow (Tempo Canons),Xenakis (Stochastic),L-Systems (Generative),Potential Unified Variable,Integration Challenge
+Time/Tempo,Tempo ratio (t1:t2),Inter-onset interval (IOI),Generation iteration timing,temporal_rate[],Ratio vs distribution vs iteration
+Time/Tempo,Convergence points,Time distribution mean,Rule application sequence,convergence_time[],Mathematical vs stochastic
+Time/Tempo,Arch form timing,Temporal clustering,Temporal scaling per generation,tempo_modulation(t),Deterministic vs probabilistic
+Pitch,Pitch canon (transposition),Pitch distribution (Gaussian),Pitch mapping from alphabet,pitch[],Harmonic vs statistical vs symbolic
+Pitch,Voice independence,Sieve theory (pitch classes),Symbol-to-pitch rules,pitch_class_set[],Tonal vs atonal vs abstract
+Pitch,Harmonic convergence,Glissando speed,Interval succession,pitch_trajectory(t),Continuous vs discrete
+Density,Voice count,Poisson λ parameter,String length growth rate,event_density(t),Fixed voice count vs variable events
+Density,Polyphonic density,Event density per time unit,Symbol count per iteration,polyphony(t),Structural vs emergent
+Density,Note spacing,Spatial density,Branching factor,note_spacing[],Geometric vs statistical
+Duration,Note duration (at tempo),Note duration distribution,Duration mapping from alphabet,duration[],Tempo-dependent vs probabilistic vs rule-based
+Duration,Rhythmic patterns,Stochastic rhythm generation,Rhythmic interpretation rules,rhythm_pattern[],Periodic vs stochastic vs generated
+Duration,Metric structure,Temporal granularity,Hierarchical time scaling,time_scale,Multiple time scales
+Dynamics,Velocity (MIDI),Velocity distribution,Amplitude mapping from alphabet,velocity[],MIDI vs distribution vs symbol
+Dynamics,Dynamic contrast,Dynamic envelope,Dynamic interpretation rules,dynamic_envelope(t),Shaped vs random vs mapped
+Dynamics,Accent patterns,Intensity field,Expression mapping,intensity[],Continuous vs discrete vs symbolic
+Structure,Canon structure,Markov state transitions,Axiom + production rules,structure_grammar,Canon vs Markov vs grammar
+Structure,Section boundaries,Probability matrix,Iteration depth,section_transitions[],Temporal vs probabilistic vs recursive
+Structure,Temporal form,Form as stochastic process,Self-similar structure,form_topology,Geometric vs stochastic vs fractal
+Transformation,Tempo acceleration/deceleration,Drift/tendency parameters,Production rule transformations,"transformation_function(x,t)",Deterministic vs drift vs substitution
+Transformation,Pitch transposition,Frequency field transformation,Symbol substitution rules,mapping_rules[],Musical vs mathematical vs computational
+Transformation,Rhythmic augmentation/diminution,Grain size modulation,Recursive transformations,scale_factor[],Continuous vs discrete vs iterative

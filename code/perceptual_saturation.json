@@ -1,0 +1,18 @@
+{
+  "window_ms": 40.0,
+  "predicted_breakpoint_nps": 25.0,
+  "seed": 42,
+  "n_trials": 20,
+  "n_events": 200,
+  "n_levels": 14,
+  "breakpoint_nps": 60.0,
+  "ci95": [
+    60.0,
+    60.0
+  ],
+  "n_bootstrap": 3000,
+  "slope_pre": -0.010964128777244007,
+  "slope_post": -0.0005864372516804918,
+  "r2_piecewise": 0.9905405167934503,
+  "r2_linear": 0.757933434199184
+}

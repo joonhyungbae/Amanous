@@ -1,0 +1,9 @@
+# Large binary files
+*.tar.xz
+*.sf2
+
+# Soundfonts directory (contains large files)
+soundfonts/
+
+# Paper lives in its own repository (joonhyungbae/amanous_paper)
+amanous_paper/

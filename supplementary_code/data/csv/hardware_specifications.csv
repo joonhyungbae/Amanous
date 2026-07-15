@@ -1,0 +1,9 @@
+Parameter,Value/Range,Source,Relevance
+Velocity Levels,1024 (10-bit),Disklavier Pro specs,Expressive control resolution
+Sampling Rate,800-1000 Hz,Disklavier Pro specs,Temporal precision limit
+Physical Latency,10-30 ms,Goebl & Bresin 2003,Timing compensation required
+Key Reset Time,~50 ms,Physical mechanics,Physical constraint on repetition
+Max Trill Rate per Key,~20 Hz,Derived from reset time,Maximum superhuman trill speed
+Total Keys,88,Standard piano,Pitch space size
+MIDI Protocol,XPMIDI,Yamaha XPMIDI extension,High-resolution velocity
+Velocity-Latency Coupling,Louder = Earlier,Goebl & Bresin 2003,Must compensate in composition
